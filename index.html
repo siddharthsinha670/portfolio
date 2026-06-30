@@ -896,6 +896,10 @@ input, textarea {
 .social-card--github:hover .social-card__icon { color: var(--text-heading); background: rgba(249,250,251,0.1); }
 .social-card--leetcode:hover .social-card__icon { color: #FFA116; background: rgba(255,161,22,0.15); }
 .social-card--youtube:hover .social-card__icon { color: #FF0000; background: rgba(255,0,0,0.15); }
+.social-card--instagram:hover .social-card__icon {
+  color: #fff;
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
 
 .footer-bar {
   border-top: 1px solid var(--border);
@@ -1557,6 +1561,21 @@ body.edit-mode .avatar-frame:hover .avatar-frame__edit-hint { opacity: 1; }
               <span class="social-card__text">
                 <strong data-editable contenteditable="false">LinkedIn</strong>
                 <span data-editable contenteditable="false">Professional updates</span>
+              </span>
+              <button type="button" class="edit-link-btn" data-edit-link aria-label="Set link URL">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              </button>
+              <svg class="social-card__arrow" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+
+            <a href="https://www.instagram.com/___siddharthsinha/?utm_source=ig_web_button_share_sheet" class="social-card social-card--instagram" data-link target="_blank" rel="noopener">
+              <button type="button" class="remove-card-btn" data-remove>&times;</button>
+              <span class="social-card__icon">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+              </span>
+              <span class="social-card__text">
+                <strong data-editable contenteditable="false">Instagram</strong>
+                <span data-editable contenteditable="false">Behind the scenes</span>
               </span>
               <button type="button" class="edit-link-btn" data-edit-link aria-label="Set link URL">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
