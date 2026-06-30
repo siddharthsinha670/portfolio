@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siddharth Sinha — Software Engineer</title>
+  <meta name="description" content="Siddharth Sinha — Software Engineer building with Java, C++ and the web.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+/* ============================================
+   CUSTOM PROPERTIES
+   ============================================ */
+:root {
+  /* Colors */
+  --bg: #0B0F19;
+  --bg-soft: #0E1320;
+  --surface: #1F2937;
+  --surface-soft: rgba(31, 41, 55, 0.55);
+  --border: #374151;
+  --text-heading: #F9FAFB;
+  --text-body: #E5E7EB;
+  --text-muted: #9CA3AF;
+
+  --indigo: #6366F1;
+  --indigo-soft: rgba(99, 102, 241, 0.16);
+  --emerald: #10B981;
+  --emerald-soft: rgba(16, 185, 129, 0.16);
+
+  /* Type */
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout */
+  --max-width: 1200px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --speed: 0.35s;
+}
+
+/* ============================================
+   RESET
+   ============================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul { list-style: none; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   SHARED / UTILITIES
+   ============================================ */
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--emerald);
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  color: var(--text-heading);
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+.section-intro {
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+
+.body-text {
+  color: var(--text-body);
+  font-size: 1.02rem;
+  margin-bottom: 1rem;
+  max-width: 540px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.97rem;
+  font-family: var(--font-body);
+  transition: transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease), background var(--speed) var(--ease), border-color var(--speed) var(--ease);
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--indigo), #4f46e5);
+  color: #fff;
+  box-shadow: 0 8px 24px -8px rgba(99, 102, 241, 0.55);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -8px rgba(99, 102, 241, 0.7);
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-heading);
+}
+
+.btn--ghost:hover {
+  border-color: var(--emerald);
+  color: var(--emerald);
+  transform: translateY(-2px);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.tag, .chip {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid transparent;
+  transition: background var(--speed) var(--ease), border-color var(--speed) var(--ease), backdrop-filter var(--speed) var(--ease);
+}
+
+.navbar.is-scrolled {
+  background: rgba(11, 15, 25, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+}
+
+.navbar__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+}
+
+.navbar__logo .dot { color: var(--emerald); }
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-size: 0.93rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  position: relative;
+  transition: color var(--speed) var(--ease);
+}
+
+.nav-link:hover { color: var(--text-heading); }
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--emerald);
+  transition: width var(--speed) var(--ease);
+}
+
+.nav-link:hover::after { width: 100%; }
+
+.nav-link--cta {
+  background: var(--indigo-soft);
+  color: var(--indigo);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(99,102,241,0.35);
+}
+.nav-link--cta::after { display: none; }
+.nav-link--cta:hover {
+  background: var(--indigo);
+  color: #fff;
+}
+
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.4rem;
+}
+.navbar__toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--text-heading);
+  border-radius: 2px;
+  transition: transform var(--speed) var(--ease), opacity var(--speed) var(--ease);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 7rem 0 4rem;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 10%, transparent 70%);
+}
+
+.hero__glow {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.35;
+}
+.hero__glow--indigo {
+  background: var(--indigo);
+  top: -10%;
+  right: -5%;
+}
+.hero__glow--emerald {
+  background: var(--emerald);
+  bottom: -15%;
+  left: -10%;
+  opacity: 0.22;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--emerald);
+  background: var(--emerald-soft);
+  border: 1px solid rgba(16,185,129,0.3);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.6rem;
+}
+
+.eyebrow__pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.55); }
+  70% { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+  100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.08;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.9rem;
+}
+
+.hero__name {
+  background: linear-gradient(120deg, var(--indigo), var(--emerald));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__typed {
+  font-family: var(--font-mono);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-body);
+  min-height: 1.8em;
+  margin-bottom: 1.5rem;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  background: var(--emerald);
+  margin-left: 2px;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink { 50% { background: transparent; } }
+
+.hero__hook {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin-bottom: 2.2rem;
+}
+
+.hero__cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.hero__scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.hero__scroll-hint span {
+  width: 22px;
+  height: 34px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  position: relative;
+}
+.hero__scroll-hint span::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 6px;
+  background: var(--emerald);
+  border-radius: 2px;
+  animation: scrollDot 1.6s infinite;
+}
+@keyframes scrollDot {
+  0% { opacity: 1; top: 6px; }
+  100% { opacity: 0; top: 18px; }
+}
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar-frame {
+  position: relative;
+  width: min(320px, 80vw);
+  height: min(320px, 80vw);
+}
+
+.avatar-frame__ring {
+  position: absolute;
+  inset: -14px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, var(--indigo), var(--emerald));
+  opacity: 0.55;
+  filter: blur(2px);
+  animation: rotateGlow 8s linear infinite;
+}
+
+@keyframes rotateGlow {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.75; }
+}
+
+.avatar-frame__img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.avatar-frame__badge {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-heading);
+  white-space: nowrap;
+}
+
+.avatar-frame__badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+.about { padding: 7rem 0; }
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.about__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.about__metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.metric-card {
+  background: var(--surface-soft);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.6rem 1.4rem;
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+}
+
+.metric-card:hover, .metric-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--indigo);
+  box-shadow: 0 16px 32px -16px rgba(99,102,241,0.4);
+}
+
+.metric-card--wide {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.metric-card__icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--emerald-soft);
+  color: var(--emerald);
+  margin-bottom: 1rem;
+}
+.metric-card__icon svg { width: 19px; height: 19px; }
+
+.metric-card--wide .metric-card__icon { margin-bottom: 0; flex-shrink: 0; }
+
+.metric-card__value {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.2rem;
+}
+
+.metric-card__value-text {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.metric-card__label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   SKILLS
+   ============================================ */
+.skills { padding: 7rem 0; background: var(--bg-soft); }
+
+.skills__category { margin-bottom: 2.5rem; }
+.skills__category:last-child { margin-bottom: 0; }
+
+.skills__category-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+}
+
+.skills__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.skill-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.3rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-body);
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+
+.skill-pill__icon {
+  width: 20px;
+  height: 20px;
+  color: var(--c, var(--text-muted));
+  display: flex;
+}
+.skill-pill__icon svg { width: 100%; height: 100%; }
+
+.skill-pill:hover {
+  transform: translateY(-3px);
+  border-color: var(--emerald);
+  background: var(--emerald-soft);
+  box-shadow: 0 0 24px -6px rgba(16,185,129,0.55);
+}
+
+/* ============================================
+   PROJECTS
+   ============================================ */
+.projects { padding: 7rem 0; }
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.project-card {
+  background: var(--surface-soft);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--indigo);
+  box-shadow: 0 24px 48px -24px rgba(99,102,241,0.45);
+}
+
+.project-card__media {
+  position: relative;
+  height: 170px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(16,185,129,0.12));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.6s var(--ease);
+}
+
+.project-card:hover .project-card__media { transform: scale(1.04); }
+
+.project-card__media-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.project-card__media-glyph {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: rgba(249,250,251,0.18);
+  letter-spacing: 0.05em;
+}
+
+.project-card__body {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text-heading);
+  margin-bottom: 0.6rem;
+}
+
+.project-card__desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+  flex: 1;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.3rem;
+}
+
+.project-card__links {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 1.1rem;
+}
+
+.link-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-body);
+  transition: color var(--speed) var(--ease), gap var(--speed) var(--ease);
+}
+.link-icon svg { width: 16px; height: 16px; }
+.link-icon:hover { color: var(--emerald); }
+
+/* ============================================
+   CONTACT / FOOTER
+   ============================================ */
+.contact { padding: 7rem 0 0; background: var(--bg-soft); }
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  padding-bottom: 5rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+  max-width: 480px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.field input, .field textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  color: var(--text-heading);
+  transition: border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+  resize: vertical;
+}
+
+.field input::placeholder, .field textarea::placeholder { color: var(--text-muted); }
+
+.field input:focus, .field textarea:focus {
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px var(--indigo-soft);
+  outline: none;
+}
+
+.field__status {
+  font-size: 0.88rem;
+  color: var(--emerald);
+  min-height: 1.2em;
+}
+
+.contact__socials {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.contact__socials-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.3rem;
+  transition: transform var(--speed) var(--ease), border-color var(--speed) var(--ease), box-shadow var(--speed) var(--ease);
+}
+
+.social-card__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--text-muted);
+  transition: color var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+.social-card__icon svg { width: 19px; height: 19px; }
+
+.social-card__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.social-card__text strong { color: var(--text-heading); font-size: 0.97rem; }
+.social-card__text span { color: var(--text-muted); font-size: 0.82rem; }
+
+.social-card__arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity var(--speed) var(--ease), transform var(--speed) var(--ease), color var(--speed) var(--ease);
+}
+
+.social-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--indigo);
+}
+.social-card:hover .social-card__arrow {
+  opacity: 1;
+  transform: translate(0,0);
+  color: var(--indigo);
+}
+
+.social-card--linkedin:hover .social-card__icon { color: #0A66C2; background: rgba(10,102,194,0.15); }
+.social-card--github:hover .social-card__icon { color: var(--text-heading); background: rgba(249,250,251,0.1); }
+.social-card--leetcode:hover .social-card__icon { color: #FFA116; background: rgba(255,161,22,0.15); }
+.social-card--youtube:hover .social-card__icon { color: #FF0000; background: rgba(255,0,0,0.15); }
+
+.footer-bar {
+  border-top: 1px solid var(--border);
+  padding: 1.6rem 1.5rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bar p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-bar__top {
+  font-size: 0.85rem;
+  color: var(--emerald);
+  font-weight: 600;
+  transition: opacity var(--speed) var(--ease);
+}
+.footer-bar__top:hover { opacity: 0.7; }
+
+/* ============================================
+   RESPONSIVE — TABLET
+   ============================================ */
+@media (max-width: 1024px) {
+  .hero__inner { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+  .hero__hook { margin-inline: auto; }
+  .hero__cta { justify-content: center; }
+  .hero__scroll-hint { justify-content: center; }
+  .hero__visual { order: -1; }
+
+  .about__grid { grid-template-columns: 1fr; }
+  .about__text { text-align: left; }
+
+  .projects__grid { grid-template-columns: repeat(2, 1fr); }
+
+  .contact__grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE
+   ============================================ */
+@media (max-width: 720px) {
+  .navbar__toggle { display: flex; }
+
+  .navbar__links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(78vw, 320px);
+    background: rgba(15, 19, 30, 0.97);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    border-left: 1px solid var(--border);
+    transform: translateX(100%);
+    transition: transform var(--speed) var(--ease);
+  }
+
+  .navbar__links.is-open { transform: translateX(0); }
+
+  .navbar__toggle.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .navbar__toggle.is-active span:nth-child(2) { opacity: 0; }
+  .navbar__toggle.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .hero { padding-top: 6rem; }
+  .hero__title { font-size: clamp(2rem, 9vw, 2.6rem); }
+
+  .about__metrics { grid-template-columns: 1fr 1fr; }
+  .metric-card--wide { grid-column: span 2; flex-direction: row; }
+
+  .projects__grid { grid-template-columns: 1fr; }
+
+  .skills__grid { gap: 0.6rem; }
+  .skill-pill { padding: 0.7rem 1.05rem; font-size: 0.88rem; }
+
+  .footer-bar { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 420px) {
+  .about__metrics { grid-template-columns: 1fr; }
+  .metric-card--wide { grid-column: span 1; }
+}
+
+/* ============================================
+   RESPONSIVE — ULTRAWIDE
+   ============================================ */
+@media (min-width: 1600px) {
+  :root { --max-width: 1360px; }
+  .hero__title { font-size: 4.4rem; }
+}
+
+  
+
+/* ============================================
+   EDIT MODE — additive styles (framework untouched above)
+   ============================================ */
+[data-editable] {
+  cursor: default;
+}
+
+body.edit-mode [data-editable] {
+  cursor: text;
+  border-radius: 6px;
+  outline: 1px dashed rgba(99, 102, 241, 0.45);
+  outline-offset: 3px;
+  caret-color: var(--emerald);
+  transition: outline-color var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+
+/* The hero name normally renders as a gradient-clipped (transparent fill)
+   heading. While actively editing, that makes the caret and freshly typed
+   characters invisible. Force a solid, high-contrast color during edit mode
+   only — the gradient effect returns automatically once edit mode is off. */
+body.edit-mode .hero__name {
+  -webkit-text-fill-color: var(--text-heading);
+  background: none;
+  color: var(--text-heading);
+}
+
+body.edit-mode [data-editable]:hover {
+  outline-color: var(--indigo);
+  background: rgba(99, 102, 241, 0.06);
+}
+
+body.edit-mode [data-editable]:focus {
+  outline: 2px solid var(--emerald);
+  background: rgba(16, 185, 129, 0.07);
+}
+
+.add-card-btn,
+.remove-card-btn,
+.edit-link-btn,
+.edit-phrases-btn,
+.avatar-frame__edit-hint {
+  display: none;
+}
+
+body.edit-mode .add-card-btn {
+  display: inline-flex;
+}
+
+body.edit-mode .remove-card-btn,
+body.edit-mode .edit-link-btn {
+  display: inline-flex;
+}
+
+body.edit-mode .avatar-frame__edit-hint {
+  display: flex;
+}
+
+.add-card-btn {
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: var(--surface-soft);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.85rem 1.3rem;
+  transition: border-color var(--speed) var(--ease), color var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+.add-card-btn:hover {
+  border-color: var(--emerald);
+  color: var(--emerald);
+  background: var(--emerald-soft);
+}
+.add-card-btn svg { width: 16px; height: 16px; }
+
+.project-card .add-card-btn,
+.social-card.add-card-btn {
+  /* projects grid add tile mimics card proportions */
+}
+
+.add-project-tile {
+  border-radius: var(--radius-lg);
+  min-height: 260px;
+}
+
+.skill-pill, .project-card, .social-card {
+  position: relative;
+}
+
+.remove-card-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 15, 25, 0.75);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1;
+  z-index: 5;
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease), border-color var(--speed) var(--ease);
+}
+.remove-card-btn:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.skill-pill .remove-card-btn {
+  top: -8px;
+  right: -8px;
+}
+
+.edit-link-btn {
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--indigo-soft);
+  color: var(--indigo);
+  margin-left: 0.3rem;
+}
+.edit-link-btn svg { width: 12px; height: 12px; }
+
+.edit-phrases-btn {
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--indigo);
+  background: var(--indigo-soft);
+  border: 1px solid rgba(99,102,241,0.35);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  margin-top: 0.6rem;
+}
+.edit-phrases-btn svg { width: 13px; height: 13px; }
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+.tag-row .tag { position: relative; padding-right: 1.6rem; }
+.tag-remove {
+  display: none;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+body.edit-mode .tag-remove { display: inline-flex; }
+body.edit-mode .tag-remove:hover { color: #ef4444; }
+
+.avatar-frame__edit-hint {
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 15, 25, 0.55);
+  border-radius: 28px;
+  color: var(--text-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  text-align: center;
+  cursor: pointer;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity var(--speed) var(--ease);
+}
+body.edit-mode .avatar-frame:hover .avatar-frame__edit-hint { opacity: 1; }
+
+/* Floating edit-mode toggle */
+.edit-toggle {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 2000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, var(--indigo), #4f46e5);
+  color: #fff;
+  box-shadow: 0 12px 28px -8px rgba(99,102,241,0.6);
+  transition: transform var(--speed) var(--ease), box-shadow var(--speed) var(--ease), background var(--speed) var(--ease);
+}
+.edit-toggle:hover { transform: translateY(-3px); }
+.edit-toggle svg { width: 16px; height: 16px; }
+.edit-toggle.is-active {
+  background: linear-gradient(135deg, var(--emerald), #059669);
+  box-shadow: 0 12px 28px -8px rgba(16,185,129,0.6);
+}
+
+@media (max-width: 720px) {
+  .edit-toggle {
+    bottom: 1.1rem;
+    right: 1.1rem;
+    padding: 0.75rem 1.1rem;
+    font-size: 0.82rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <nav class="navbar__inner">
+      <a href="#hero" class="navbar__logo" data-editable contenteditable="false">Siddharth<span class="dot">.</span>Sinha</a>
+
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#" id="navResumeBtn" class="nav-link" download>Resume</a></li>
+        <li><a href="#contact" class="nav-link nav-link--cta">Let's Talk</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="mainContent">
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__glow hero__glow--indigo"></div>
+        <div class="hero__glow hero__glow--emerald"></div>
+        <div class="hero__grid"></div>
+      </div>
+
+      <div class="hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow"><span class="eyebrow__pulse"></span> <span data-editable contenteditable="false">Open to opportunities</span></p>
+          <h1 class="hero__title">
+            Hi, I am <span class="hero__name" data-editable contenteditable="false">Siddharth Sinha</span>
+          </h1>
+          <p class="hero__typed">
+            <span id="typedText"></span><span class="cursor" aria-hidden="true">&nbsp;</span>
+          </p>
+          <button type="button" class="edit-phrases-btn" id="editPhrasesBtn">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Edit rotating taglines
+          </button>
+          <p class="hero__hook" data-editable contenteditable="false">
+            Write a short, high-impact line about what you do and the value you bring — this is your hook.
+          </p>
+
+          <div class="hero__cta">
+            <a href="#projects" class="btn btn--primary">View Work</a>
+            <a href="#contact" class="btn btn--ghost">Connect</a>
+            <a href="#" id="heroResumeBtn" class="btn btn--ghost" download>
+              <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Resume
+            </a>
+          </div>
+          <button type="button" class="edit-phrases-btn" id="uploadResumeBtn" style="margin-top:0.6rem;">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span id="uploadResumeLabel">Upload your resume (PDF)</span>
+          </button>
+          <input type="file" id="resumeInput" accept="application/pdf" style="display:none">
+
+          <div class="hero__scroll-hint" aria-hidden="true">
+            <span></span>
+            Scroll to explore
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="avatar-frame" id="avatarFrame">
+            <div class="avatar-frame__ring"></div>
+            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=placeholder&backgroundColor=1f2937" alt="Profile avatar placeholder" class="avatar-frame__img" id="avatarImg">
+            <div class="avatar-frame__edit-hint" id="avatarEditHint">Click to<br>change photo</div>
+            <input type="file" id="avatarInput" accept="image/*" style="display:none">
+            <div class="avatar-frame__badge">
+              <span class="avatar-frame__badge-dot"></span> <span data-editable contenteditable="false">Status</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+      <div class="section-inner about__grid">
+        <div class="about__text">
+          <p class="section-label">01 — About</p>
+          <h2 class="section-title" data-editable contenteditable="false">Add a headline about yourself.</h2>
+          <p class="body-text" data-editable contenteditable="false">
+            Share your background here — where you started, what you studied, and what got you into building things.
+          </p>
+          <p class="body-text" data-editable contenteditable="false">
+            Mention your core focus — the languages, frameworks or domains you spend most of your time in.
+          </p>
+          <p class="body-text" data-editable contenteditable="false">
+            Add what you're currently learning, exploring, or working on right now.
+          </p>
+          <div class="about__tags" id="aboutTags">
+            <span class="tag-row" style="display:contents;">
+              <span class="tag" data-editable contenteditable="false">Tag One<span class="tag-remove" data-remove>&times;</span></span>
+              <span class="tag" data-editable contenteditable="false">Tag Two<span class="tag-remove" data-remove>&times;</span></span>
+              <span class="tag" data-editable contenteditable="false">Tag Three<span class="tag-remove" data-remove>&times;</span></span>
+            </span>
+            <button type="button" class="add-card-btn" id="addTagBtn" style="padding:0.35rem 0.85rem; font-size:0.78rem; border-radius:999px;">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Tag
+            </button>
+          </div>
+        </div>
+
+        <div class="about__metrics">
+          <div class="metric-card" tabindex="0">
+            <div class="metric-card__icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3 8-8M21 12a9 9 0 11-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="metric-card__value" data-target="0" data-suffix="+">0+</p>
+            <p class="metric-card__label" data-editable contenteditable="false">Metric Label</p>
+          </div>
+
+          <div class="metric-card" tabindex="0">
+            <div class="metric-card__icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 3v12M18 9a3 3 0 100-6 3 3 0 000 6zM6 21a3 3 0 100-6 3 3 0 000 6zM18 9a9 9 0 01-9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="metric-card__value" data-target="0" data-suffix="+">0+</p>
+            <p class="metric-card__label" data-editable contenteditable="false">Metric Label</p>
+          </div>
+
+          <div class="metric-card" tabindex="0">
+            <div class="metric-card__icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4zM4 9h16M9 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="metric-card__value" data-target="0" data-suffix="+">0+</p>
+            <p class="metric-card__label" data-editable contenteditable="false">Metric Label</p>
+          </div>
+
+          <div class="metric-card metric-card--wide" tabindex="0">
+            <div class="metric-card__icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5zM6 12v5c3 2 9 2 12 0v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="metric-card__value-text" data-editable contenteditable="false">Add Detail</p>
+            <p class="metric-card__label" data-editable contenteditable="false">Short label for this detail</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="skills" id="skills">
+      <div class="section-inner">
+        <p class="section-label">02 — Skills</p>
+        <h2 class="section-title" data-editable contenteditable="false">Tools I reach for.</h2>
+        <p class="body-text section-intro" data-editable contenteditable="false">
+          Add a line about how you picked these tools, or what kind of problems you use them for.
+        </p>
+
+        <div class="skills__category">
+          <h3 class="skills__category-title" data-editable contenteditable="false">Languages</h3>
+          <div class="skills__grid" data-skill-grid>
+            <div class="skill-pill">
+              <button type="button" class="remove-card-btn" data-remove>&times;</button>
+              <span class="skill-pill__icon" style="--c:#9CA3AF"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span>
+              <span data-editable contenteditable="false">Skill Name</span>
+            </div>
+            <button type="button" class="add-card-btn" data-add-skill>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Add Skill
+            </button>
+          </div>
+        </div>
+
+        <div class="skills__category">
+          <h3 class="skills__category-title" data-editable contenteditable="false">Frontend</h3>
+          <div class="skills__grid" data-skill-grid>
+            <div class="skill-pill">
+              <button type="button" class="remove-card-btn" data-remove>&times;</button>
+              <span class="skill-pill__icon" style="--c:#9CA3AF"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span>
+              <span data-editable contenteditable="false">Skill Name</span>
+            </div>
+            <button type="button" class="add-card-btn" data-add-skill>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Add Skill
+            </button>
+          </div>
+        </div>
+
+        <div class="skills__category">
+          <h3 class="skills__category-title" data-editable contenteditable="false">Tools &amp; Platforms</h3>
+          <div class="skills__grid" data-skill-grid>
+            <div class="skill-pill">
+              <button type="button" class="remove-card-btn" data-remove>&times;</button>
+              <span class="skill-pill__icon" style="--c:#9CA3AF"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span>
+              <span data-editable contenteditable="false">Skill Name</span>
+            </div>
+            <button type="button" class="add-card-btn" data-add-skill>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Add Skill
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="projects" id="projects">
+      <div class="section-inner">
+        <p class="section-label">03 — Projects</p>
+        <h2 class="section-title" data-editable contenteditable="false">Things I've shipped.</h2>
+        <p class="body-text section-intro" data-editable contenteditable="false">
+          Add a line introducing your project section — what kind of work shows up here.
+        </p>
+
+        <div class="projects__grid" id="projectsGrid">
+
+          <article class="project-card">
+            <button type="button" class="remove-card-btn" data-remove>&times;</button>
+            <div class="project-card__media">
+              <div class="project-card__media-pattern" aria-hidden="true"></div>
+              <span class="project-card__media-glyph">{ }</span>
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title" data-editable contenteditable="false">Project Title</h3>
+              <p class="project-card__desc" data-editable contenteditable="false">
+                Briefly describe what this project does, the problem it solves, and what you learned building it.
+              </p>
+              <div class="project-card__tags">
+                <span class="chip" data-editable contenteditable="false">Tag</span>
+                <span class="chip" data-editable contenteditable="false">Tag</span>
+              </div>
+              <div class="project-card__links">
+                <a href="#" class="link-icon" data-link aria-label="GitHub code link">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4.4v11.2L12 22l-8-4.4V6.4L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                  <span data-editable contenteditable="false">GitHub Code</span>
+                </a>
+                <button type="button" class="edit-link-btn" data-edit-link aria-label="Set GitHub link URL">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                </button>
+                <a href="#" class="link-icon" data-link aria-label="Live demo link">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4L10 14M9 4H5a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span data-editable contenteditable="false">Live Demo</span>
+                </a>
+                <button type="button" class="edit-link-btn" data-edit-link aria-label="Set live demo link URL">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <button type="button" class="add-card-btn add-project-tile" id="addProjectBtn" style="flex-direction:column;">
+            <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add Project
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT / FOOTER ===== -->
+    <section class="contact" id="contact">
+      <div class="section-inner contact__grid">
+        <div class="contact__form-wrap">
+          <p class="section-label">04 — Contact</p>
+          <h2 class="section-title" data-editable contenteditable="false">Let's build something.</h2>
+          <p class="body-text section-intro" data-editable contenteditable="false">
+            Add a short invitation for people to reach out — what kind of conversations you're open to.
+          </p>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" required>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell me a bit about it..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block">
+              Send Message
+              <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="field__status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="contact__socials">
+          <p class="contact__socials-label">Find me elsewhere</p>
+
+          <div id="socialsList">
+            <a href="#" class="social-card" data-link>
+              <button type="button" class="remove-card-btn" data-remove>&times;</button>
+              <span class="social-card__icon">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M8 11v5M8 8v.01M12 16v-3.5c0-1.5 1-2 2-2s2 .5 2 2V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </span>
+              <span class="social-card__text">
+                <strong data-editable contenteditable="false">Platform</strong>
+                <span data-editable contenteditable="false">Add a short description</span>
+              </span>
+              <button type="button" class="edit-link-btn" data-edit-link aria-label="Set link URL">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+              </button>
+              <svg class="social-card__arrow" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <button type="button" class="add-card-btn" id="addSocialBtn">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add Social Link
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bar">
+        <p>&copy; <span id="year"></span> <span data-editable contenteditable="false">Siddharth Sinha</span>. Built with HTML, CSS &amp; JavaScript.</p>
+        <a href="#hero" class="footer-bar__top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <button type="button" class="edit-toggle" id="editToggle">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    <span id="editToggleLabel">Edit Details</span>
+  </button>
+
+  <!-- Hidden templates for adding new cards -->
+  <template id="skillTemplate">
+    <div class="skill-pill">
+      <button type="button" class="remove-card-btn" data-remove>&times;</button>
+      <span class="skill-pill__icon" style="--c:#9CA3AF"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span>
+      <span data-editable contenteditable="false">Skill Name</span>
+    </div>
+  </template>
+
+  <template id="projectTemplate">
+    <article class="project-card">
+      <button type="button" class="remove-card-btn" data-remove>&times;</button>
+      <div class="project-card__media">
+        <div class="project-card__media-pattern" aria-hidden="true"></div>
+        <span class="project-card__media-glyph">{ }</span>
+      </div>
+      <div class="project-card__body">
+        <h3 class="project-card__title" data-editable contenteditable="false">Project Title</h3>
+        <p class="project-card__desc" data-editable contenteditable="false">
+          Briefly describe what this project does, the problem it solves, and what you learned building it.
+        </p>
+        <div class="project-card__tags">
+          <span class="chip" data-editable contenteditable="false">Tag</span>
+          <span class="chip" data-editable contenteditable="false">Tag</span>
+        </div>
+        <div class="project-card__links">
+          <a href="#" class="link-icon" data-link aria-label="GitHub code link">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4.4v11.2L12 22l-8-4.4V6.4L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <span data-editable contenteditable="false">GitHub Code</span>
+          </a>
+          <button type="button" class="edit-link-btn" data-edit-link aria-label="Set GitHub link URL">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </button>
+          <a href="#" class="link-icon" data-link aria-label="Live demo link">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4L10 14M9 4H5a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-editable contenteditable="false">Live Demo</span>
+          </a>
+          <button type="button" class="edit-link-btn" data-edit-link aria-label="Set live demo link URL">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <template id="socialTemplate">
+    <a href="#" class="social-card" data-link>
+      <button type="button" class="remove-card-btn" data-remove>&times;</button>
+      <span class="social-card__icon">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg>
+      </span>
+      <span class="social-card__text">
+        <strong data-editable contenteditable="false">Platform</strong>
+        <span data-editable contenteditable="false">Add a short description</span>
+      </span>
+      <button type="button" class="edit-link-btn" data-edit-link aria-label="Set link URL">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5L17 4.5l2.5 2.5L6.5 20H4v-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+      <svg class="social-card__arrow" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </template>
+
+  <template id="tagTemplate">
+    <span class="tag" data-editable contenteditable="false">Tag<span class="tag-remove" data-remove>&times;</span></span>
+  </template>
+
+  <script>
+(function () {
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STORAGE_KEY = 'portfolioContentV1';
+
+  function saveJSON(key, val) {
+    try { localStorage.setItem(STORAGE_KEY + ':' + key, JSON.stringify(val)); } catch (e) {}
+  }
+  function loadJSON(key, fallback) {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY + ':' + key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) { return fallback; }
+  }
+
+  /* ============================================
+     STEP 1: Restore saved content FIRST, before any
+     other code queries/binds elements inside #mainContent.
+     ============================================ */
+  var mainContent = document.getElementById('mainContent');
+  var savedHTML = loadJSON('mainHTML', null);
+  if (savedHTML) {
+    mainContent.innerHTML = savedHTML;
+    document.querySelectorAll('[data-editable]').forEach(function (el) {
+      el.setAttribute('contenteditable', 'false');
+    });
+  }
+
+  /* ============================================
+     STEP 2: Now safe to query everything.
+     ============================================ */
+  init();
+
+  function init() {
+    /* NAVBAR */
+    var navbar = document.getElementById('navbar');
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    function onScroll() { navbar.classList.toggle('is-scrolled', window.scrollY > 12); }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    navToggle.addEventListener('click', function () {
+      var isOpen = navLinks.classList.toggle('is-open');
+      navToggle.classList.toggle('is-active', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('is-open');
+        navToggle.classList.remove('is-active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* TYPING PHRASES (editable) */
+    var typedEl = document.getElementById('typedText');
+    var defaultPhrases = ['Add a rotating tagline here.', 'Click "Edit rotating taglines" to customize.'];
+    var phrases = loadJSON('phrases', defaultPhrases);
+    var typingTimer = null;
+
+    function typeLoop() {
+      if (typingTimer) clearTimeout(typingTimer);
+      if (reduceMotion) { typedEl.textContent = phrases[0] || ''; return; }
+      var phraseIndex = 0, charIndex = 0, deleting = false;
+      function tick() {
+        var current = phrases[phraseIndex] || '';
+        if (!deleting) {
+          charIndex++;
+          typedEl.textContent = current.slice(0, charIndex);
+          if (charIndex === current.length) { deleting = true; typingTimer = setTimeout(tick, 1800); return; }
+          typingTimer = setTimeout(tick, 55);
+        } else {
+          charIndex--;
+          typedEl.textContent = current.slice(0, charIndex);
+          if (charIndex === 0) {
+            deleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typingTimer = setTimeout(tick, 400);
+            return;
+          }
+          typingTimer = setTimeout(tick, 28);
+        }
+      }
+      tick();
+    }
+    typeLoop();
+
+    document.getElementById('editPhrasesBtn').addEventListener('click', function () {
+      var input = prompt('Enter taglines separated by | (pipe):', phrases.join(' | '));
+      if (input === null) return;
+      phrases = input.split('|').map(function (s) { return s.trim(); }).filter(Boolean);
+      if (!phrases.length) phrases = defaultPhrases;
+      saveJSON('phrases', phrases);
+      typeLoop();
+    });
+
+    /* COUNTERS */
+    function animateCount(el) {
+      var target = parseInt(el.dataset.target, 10) || 0;
+      var suffix = el.dataset.suffix || '';
+      if (reduceMotion) { el.textContent = target + suffix; return; }
+      var duration = 1000, start = performance.now();
+      function frame(now) {
+        var progress = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    /* SCROLL REVEAL */
+    var revealSelector = '.about__text, .metric-card, .skills__category, .project-card, .contact__form-wrap, .contact__socials, .section-label, .section-title';
+    var revealTargets = document.querySelectorAll(revealSelector);
+
+    if (savedHTML) {
+      /* Content was restored from storage — skip fade-in choreography
+         so returning visitors see the page fully visible immediately. */
+      revealTargets.forEach(function (el) { el.classList.add('reveal', 'is-visible'); });
+      document.querySelectorAll('.metric-card__value').forEach(function (el) {
+        el.textContent = (el.dataset.target || '0') + (el.dataset.suffix || '');
+      });
+    } else {
+      revealTargets.forEach(function (el) { el.classList.add('reveal'); });
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            if (entry.target.classList.contains('metric-card')) {
+              var valueEl = entry.target.querySelector('.metric-card__value');
+              if (valueEl && !valueEl.dataset.counted) {
+                valueEl.dataset.counted = 'true';
+                animateCount(valueEl);
+              }
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      revealTargets.forEach(function (el) { observer.observe(el); });
+    }
+
+    /* CONTACT FORM */
+    var form = document.getElementById('contactForm');
+    var status = document.getElementById('formStatus');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        status.textContent = 'Please fill in all fields correctly.';
+        status.style.color = '#F87171';
+        return;
+      }
+      status.style.color = '#10B981';
+      status.textContent = 'Thanks! Your message has been noted.';
+      form.reset();
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ============================================
+       EDIT MODE
+       ============================================ */
+    var editToggle = document.getElementById('editToggle');
+    var editToggleLabel = document.getElementById('editToggleLabel');
+
+    function setEditableState(on) {
+      document.querySelectorAll('[data-editable]').forEach(function (el) {
+        el.setAttribute('contenteditable', on ? 'true' : 'false');
+      });
+    }
+
+    function enableEditMode() {
+      document.body.classList.add('edit-mode');
+      setEditableState(true);
+      editToggleLabel.textContent = 'Save & Exit';
+      editToggle.classList.add('is-active');
+    }
+
+    function disableEditMode() {
+      document.body.classList.remove('edit-mode');
+      setEditableState(false);
+      editToggleLabel.textContent = 'Edit Details';
+      editToggle.classList.remove('is-active');
+      persistContent();
+    }
+
+    editToggle.addEventListener('click', function () {
+      if (document.body.classList.contains('edit-mode')) {
+        disableEditMode();
+      } else {
+        enableEditMode();
+      }
+    });
+
+    /* Remove / edit-link buttons (event delegation) */
+    document.addEventListener('click', function (e) {
+      var removeBtn = e.target.closest('[data-remove]');
+      if (removeBtn && document.body.classList.contains('edit-mode')) {
+        e.preventDefault();
+        var card = removeBtn.closest('.skill-pill, .project-card, .social-card, .tag');
+        if (card) card.remove();
+        return;
+      }
+
+      var editLinkBtn = e.target.closest('[data-edit-link]');
+      if (editLinkBtn) {
+        e.preventDefault();
+        var linkEl = editLinkBtn.previousElementSibling && editLinkBtn.previousElementSibling.matches('[data-link]')
+          ? editLinkBtn.previousElementSibling
+          : editLinkBtn.closest('a[data-link]');
+        if (linkEl) {
+          var current = linkEl.getAttribute('href') || '';
+          var url = prompt('Enter URL:', current === '#' ? 'https://' : current);
+          if (url) linkEl.setAttribute('href', url);
+        }
+        return;
+      }
+
+      if (document.body.classList.contains('edit-mode')) {
+        var anchor = e.target.closest('a[data-link]');
+        if (anchor) e.preventDefault();
+      }
+    });
+
+    /* Add Tag */
+    var tagTemplate = document.getElementById('tagTemplate');
+    document.getElementById('addTagBtn').addEventListener('click', function () {
+      var clone = tagTemplate.content.cloneNode(true);
+      var tagRow = document.querySelector('#aboutTags .tag-row');
+      tagRow.appendChild(clone);
+      var newTag = tagRow.lastElementChild;
+      newTag.setAttribute('contenteditable', 'true');
+      newTag.focus();
+    });
+
+    /* Add Skill (per category) */
+    var skillTemplate = document.getElementById('skillTemplate');
+    document.querySelectorAll('[data-add-skill]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var grid = btn.closest('.skills__grid');
+        var clone = skillTemplate.content.cloneNode(true);
+        grid.insertBefore(clone, btn);
+        var newPill = btn.previousElementSibling;
+        var editableSpan = newPill.querySelector('[data-editable]');
+        editableSpan.setAttribute('contenteditable', 'true');
+        editableSpan.focus();
+      });
+    });
+
+    /* Add Project */
+    var projectTemplate = document.getElementById('projectTemplate');
+    document.getElementById('addProjectBtn').addEventListener('click', function () {
+      var grid = document.getElementById('projectsGrid');
+      var addBtn = document.getElementById('addProjectBtn');
+      var clone = projectTemplate.content.cloneNode(true);
+      grid.insertBefore(clone, addBtn);
+      var newCard = addBtn.previousElementSibling;
+      newCard.querySelectorAll('[data-editable]').forEach(function (el) {
+        el.setAttribute('contenteditable', 'true');
+      });
+      var title = newCard.querySelector('.project-card__title');
+      if (title) title.focus();
+    });
+
+    /* Add Social */
+    var socialTemplate = document.getElementById('socialTemplate');
+    document.getElementById('addSocialBtn').addEventListener('click', function () {
+      var list = document.getElementById('socialsList');
+      var clone = socialTemplate.content.cloneNode(true);
+      list.appendChild(clone);
+      var newCard = list.lastElementChild;
+      newCard.querySelectorAll('[data-editable]').forEach(function (el) {
+        el.setAttribute('contenteditable', 'true');
+      });
+      var strong = newCard.querySelector('strong');
+      if (strong) strong.focus();
+    });
+
+    /* Avatar image change */
+    var avatarImg = document.getElementById('avatarImg');
+    var avatarInput = document.getElementById('avatarInput');
+    var avatarEditHint = document.getElementById('avatarEditHint');
+
+    avatarEditHint.addEventListener('click', function () {
+      if (document.body.classList.contains('edit-mode')) avatarInput.click();
+    });
+    avatarInput.addEventListener('change', function () {
+      var file = avatarInput.files && avatarInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        avatarImg.src = e.target.result;
+        saveJSON('avatar', e.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+    var savedAvatar = loadJSON('avatar', null);
+    if (savedAvatar) avatarImg.src = savedAvatar;
+
+    /* ============================================
+       RESUME: upload in edit mode, downloadable by anyone
+       ============================================ */
+    var resumeInput = document.getElementById('resumeInput');
+    var uploadResumeBtn = document.getElementById('uploadResumeBtn');
+    var uploadResumeLabel = document.getElementById('uploadResumeLabel');
+    var heroResumeBtn = document.getElementById('heroResumeBtn');
+    var navResumeBtn = document.getElementById('navResumeBtn');
+
+    function applyResumeLinks(dataUrl, fileName) {
+      [heroResumeBtn, navResumeBtn].forEach(function (btn) {
+        if (!btn) return;
+        if (dataUrl) {
+          btn.href = dataUrl;
+          btn.setAttribute('download', fileName || 'resume.pdf');
+          btn.style.opacity = '';
+          btn.style.pointerEvents = '';
+          btn.removeAttribute('aria-disabled');
+        } else {
+          btn.removeAttribute('href');
+          btn.style.opacity = '0.5';
+          btn.style.pointerEvents = 'none';
+          btn.setAttribute('aria-disabled', 'true');
+        }
+      });
+    }
+
+    uploadResumeBtn.addEventListener('click', function () {
+      resumeInput.click();
+    });
+
+    resumeInput.addEventListener('change', function () {
+      var file = resumeInput.files && resumeInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var dataUrl = e.target.result;
+        saveJSON('resume', dataUrl);
+        saveJSON('resumeName', file.name);
+        applyResumeLinks(dataUrl, file.name);
+        uploadResumeLabel.textContent = 'Replace resume (' + file.name + ')';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    var savedResume = loadJSON('resume', null);
+    var savedResumeName = loadJSON('resumeName', null);
+    if (savedResume) {
+      applyResumeLinks(savedResume, savedResumeName);
+      uploadResumeLabel.textContent = 'Replace resume' + (savedResumeName ? ' (' + savedResumeName + ')' : '');
+    } else {
+      applyResumeLinks(null, null);
+    }
+
+    /* ============================================
+       PERSISTENCE: save full editable content on exit
+       ============================================ */
+    function persistContent() {
+      saveJSON('mainHTML', mainContent.innerHTML);
+      var avatarSrc = avatarImg.getAttribute('src');
+      if (avatarSrc && avatarSrc.indexOf('data:') === 0) {
+        saveJSON('avatar', avatarSrc);
+      }
+    }
+  }
+})();
+
+  </script>
+</body>
+</html>
